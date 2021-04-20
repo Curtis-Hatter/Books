@@ -15,11 +15,7 @@ function Detail(props) {
 
   function loadBooks(){
   API.getBooks()
-      .then(res => 
-        {
-          // console.log(res.data);
-          setBooks(res.data)
-        })
+      .then(res => {setBooks(res.data)})
       .catch(err => console.log(err));
   }
 

@@ -13,9 +13,8 @@ function Books() {
   const [formObject, setFormObject] = useState({})
 
   function saveBook(book) {
-      // console.log(book.volumeInfo);
-      // const {title, authors, description, imageLinks, infoLink} = book.volumeInfo;
 
+    // Save book clicked on
       API.saveBook({
         authors: book.volumeInfo.authors,
         description: book.volumeInfo.description,
@@ -24,11 +23,10 @@ function Books() {
         title: book.volumeInfo.title
       }).then(res => 
         {
-          // console.log(res.data)
           const newSetofBooks = books.filter(book =>{
             return book.volumeInfo.infoLink != res.data.link;
           })
-          // console.log(newSetofBooks);
+          // Show new list of books after clicking on save button removing it from list
           setBooks(newSetofBooks);
         })
   };
@@ -41,18 +39,11 @@ function Books() {
   function handleFormSubmit(event) {
     event.preventDefault();
     if (formObject.title) {
-      // API.saveBook({
-      //   title: formObject.title,
-      //   author: formObject.author,
-      //   synopsis: formObject.synopsis
-      // })
-      //   .then(res => loadBooks())
-      //   .catch(err => console.log(err));
+      // Call Google API from Searchbar
       GAPI.getBook(formObject.title)
       .then(res =>{
-        // console.log(res.data.items);
+        // Display response
         setBooks(res.data.items);
-        console.log(books);
       })
       .catch(err => console.log(err));
     }
