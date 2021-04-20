@@ -97,7 +97,6 @@ function Books() {
               <List>
                 {books.map(book => (
                   <ListItem key={book.id}>
-                    {/* NEED WORK HERE */}
                     <Link to={"/"} onClick={()=>{window.open(book.volumeInfo.previewLink)}}>
                       <strong>
                         {book.volumeInfo.title}
