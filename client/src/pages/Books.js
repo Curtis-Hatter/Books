@@ -6,7 +6,7 @@ import GAPI from "../utils/GAPI";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 
 function Books() {
   const [books, setBooks] = useState([])
@@ -22,7 +22,15 @@ function Books() {
         image: book.volumeInfo.imageLinks.smallThumbnail,
         link: book.volumeInfo.infoLink,
         title: book.volumeInfo.title
-      }).then(res => console.log(res.data))
+      }).then(res => 
+        {
+          // console.log(res.data)
+          const newSetofBooks = books.filter(book =>{
+            return book.volumeInfo.infoLink != res.data.link;
+          })
+          // console.log(newSetofBooks);
+          setBooks(newSetofBooks);
+        })
   };
 
   function handleInputChange(event) {
@@ -89,12 +97,13 @@ function Books() {
               <List>
                 {books.map(book => (
                   <ListItem key={book.id}>
-                    <Link to={"/books/" + book.id}>
+                    {/* NEED WORK HERE */}
+                    <Link to={"/"} onClick={()=>{window.open(book.volumeInfo.previewLink)}}>
                       <strong>
                         {book.volumeInfo.title}
                       </strong>
                     </Link>
-                    <SaveBtn onClick={() => saveBook(book)}/>
+                    <SaveBtn onClick={() => saveBook(book)} name={"Save"}/>
                   </ListItem>
                 ))}
               </List>

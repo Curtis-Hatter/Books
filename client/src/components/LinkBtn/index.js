@@ -6,7 +6,7 @@ import "./style.css";
 function LinkBtn(props) {
   return (
     <span className="Link-btn" {...props} role="button" tabIndex="0">
-      Link
+      View
     </span>
   );
 }
