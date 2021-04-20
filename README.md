@@ -1,29 +1,47 @@
-# Create React Express App
+# Google Books Search
 
-## About This Boilerplate
+## Overview
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+A React-based Google Books Search app with React components, helper/util functions, and React lifecycle methods to query and display books based on user searches. Also includes Node, Express, and MongoDB so that users can save books to review or purchase later.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+### Links
 
-## Starting the app locally
+### Pages
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+* This application has 2 pages, check out the following mockup images for each page:
 
-```
-npm install
-```
+  * *Search* - User can search for books via the Google Books API and render them here. User has the option to "View" a book, bringing them to the book on Google Books, or "Save" a book, saving it to the Mongo database.
+  ![List of Harry Potter Books](Search.png)
 
-This should install node modules within the server and the client folder.
+  * *Saved* - Renders all books saved to the Mongo database. User has an option to "View" the book, bringing them to the book on Google Books, or "Delete" a book, removing it from the Mongo database.
+  ![List of Saved Harry Potter Books](Saved.gif)
 
-After both installations complete, run the following command in your terminal:
+  * `Book` collection similar to the following:
 
-```
-npm start
-```
+    ```js
+    {
+      authors: ["Suzanne Collins"]
+      description: "Set in a dark vision of the near future, a terrifying reality TV show is taking place. Twelve boys and twelve girls are forced to appear in a live event called The Hunger Games. There is only one rule: kill or be killed. When sixteen-year-old Katniss Everdeen steps forward to take her younger sister's place in the games, she sees it as a death sentence. But Katniss has been close to death before. For her, survival is second nature."
+      image: "http://books.google.com/books/content?id=sazytgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+      link: "http://books.google.com/books?id=sazytgAACAAJ&dq=title:The+Hunger+Games&hl=&source=gbs_api"
+      title: "The Hunger Games"
+    }
+    ```
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+- - -
 
-## Deployment (Heroku)
+### Layout 
+Single Page Application that uses [`react-router-dom`](https://github.com/reactjs/react-router) to navigate, hide and show React components without changing the route within Express.
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+* The layout inlcudes at least two React Components for each page `Search` and `Saved`.
+
+#### Express routes
+
+* `/api/books` (get) - Returns all saved books as JSON.
+
+* `/api/books` (post) - Saves a new book to the database.
+
+* `/api/books/:id` (delete) - Deletes a book from the database by Mongo `_id`.
+
+* `*` (get) - Will load single HTML page in `client/build/index.html`.
+
