@@ -6,6 +6,10 @@ A React-based Google Books Search app with React components, helper/util functio
 
 ### Links
 
+https://whispering-meadow-30542.herokuapp.com/savedbooks
+
+https://github.com/Curtis-Hatter/Books
+
 ### Pages
 
 * This application has 2 pages, check out the following mockup images for each page:
